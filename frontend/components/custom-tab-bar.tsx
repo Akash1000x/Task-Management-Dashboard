@@ -1,9 +1,9 @@
 "use client";
 import * as React from "react";
-import CreateTask from "@/components/create-task-dialog";
 import { Button } from "@/components/ui/button";
 import { Combobox } from "./ui/combobox";
 import { useTaskFilter } from "@/hooks/useTaskFilter";
+import TaskForm from "./task-form";
 
 export default function CustomTabBar() {
   const [filterOption, setFilterOption] = React.useState<string>("");
@@ -30,7 +30,7 @@ export default function CustomTabBar() {
         </div>
         <Button onClick={() => setIsDialogOpe(true)}>Create Task</Button>
       </div>
-      {isDialogOpe && <CreateTask isDialogOpen={isDialogOpe} setIsDialogOpen={setIsDialogOpe} />}
+      {isDialogOpe && <TaskForm isDialogOpen={isDialogOpe} setIsDialogOpen={setIsDialogOpe} />}
     </>
   );
 }

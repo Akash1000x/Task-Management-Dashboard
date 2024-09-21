@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { Pencil, Trash2 } from "lucide-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
-import CreateTask from "./create-task-dialog";
+import TaskForm from "./task-form";
 import { Task } from "@/lib/types";
 import useGetTasks from "@/hooks/useGetTasks";
 import { CustomDialog } from "./ui/custom-dialog";
@@ -44,9 +44,9 @@ const TaskList = () => {
                 setIsEditDialogOpen(true);
                 setSelectTask(task);
               }}
-              className="flex justify-center items-center rounded-full w-6 h-6 bg-secondary cursor-pointer"
+              className="flex justify-center items-center rounded-full w-6 h-6 sm:w-9 sm:h-9 bg-secondary cursor-pointer"
             >
-              <Pencil className="sm:w-[18px] sm:h-[18px] w-3.5 h-3.w-3.5" />
+              <Pencil className="sm:w-[18px] sm:h-[18px] w-3.5 h-3.5" />
             </div>
             <Trash2
               className="sm:w-6 sm:h-6 w-4 h-4 cursor-pointer"
@@ -59,7 +59,7 @@ const TaskList = () => {
         </div>
       ))}
       {isEditDialogOpen && (
-        <CreateTask
+        <TaskForm
           isDialogOpen={isEditDialogOpen}
           setIsDialogOpen={setIsEditDialogOpen}
           editMode={true}
