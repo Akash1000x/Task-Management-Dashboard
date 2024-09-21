@@ -36,7 +36,7 @@ export const getTasks = async (req: Request, res: Response) => {
     const userId = req.user?._id;
     const tasks = await Task.find({ user: userId });
 
-    res.status(200).json(tasks);
+    res.status(200).json({ tasks, message: "Tasks fetched successfully" });
   } catch (error) {
     res.status(500).json({ message: "Server Error", error });
   }
@@ -53,7 +53,7 @@ export const updateTask = async (req: Request, res: Response) => {
       return;
     }
 
-    res.status(200).json(task);
+    res.status(200).json({ task, message: "Task updated successfully" });
   } catch (error) {
     res.status(500).json({ message: "Server Error", error });
   }
