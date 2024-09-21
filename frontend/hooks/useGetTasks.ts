@@ -1,0 +1,33 @@
+import * as React from "react";
+import axios from "axios";
+import { Task } from "@/lib/types";
+import { ApiUrl } from "@/lib/config";
+import { useDispatch } from "react-redux";
+import { setTasks } from "@/state/taskSlice";
+
+const useGetTasks = () => {
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  const getTasks = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`${ApiUrl}/task/get-tasks`, {
+        withCredentials: true,
+      });
+      if (response.status === 200) {
+        dispatch(setTasks(response.data.tasks as Task[]));
+      } else {
+        throw new Error("Failed to fetch tasks", response.data.message);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { loading, getTasks };
+};
+
+export default useGetTasks;
