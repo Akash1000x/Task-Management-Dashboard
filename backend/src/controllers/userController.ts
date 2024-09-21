@@ -70,6 +70,18 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 };
 
+export const getCurrentUser = async (req: Request, res: Response) => {
+  try {
+    if (req.user) {
+      return res.status(200).json({ user: req.user });
+    }
+    return res.status(404).json({ message: "User not found" });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ message: "An error occurred" });
+  }
+};
+
 export const logoutUser = (req: Request, res: Response) => {
   try {
     res.clearCookie("token");
