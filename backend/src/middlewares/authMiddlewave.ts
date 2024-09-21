@@ -12,7 +12,7 @@ export const verifyJWT = async (req: Request, res: Response, next: NextFunction)
 
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET as string) as { userId: string };
 
-    const user = await User.findById(decodedToken?.userId);
+    const user = await User.findById(decodedToken?.userId).select("-password");
 
     if (!user) {
       return res.status(401).json({ status: false, message: "Not authorized. Try login again." });
