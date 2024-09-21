@@ -2,10 +2,12 @@ import mongoose from "mongoose";
 
 export const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || "");
+    const dbUri = process.env.MONGODB_URI || "";
+    await mongoose.connect(`${dbUri}/taskmanagement`);
 
     console.log("DB connection established");
   } catch (error) {
-    console.log("DB Error: " + error);
+    console.log("DB Error: ", error);
+    process.exit(1);
   }
 };
