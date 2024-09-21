@@ -20,7 +20,7 @@ export default function CustomTabBar() {
     } else if (filterOption === "status") {
       sortByStatus();
     }
-  }, [filterOption]);
+  }, [filterOption, sortByDate, sortByPriority, sortByStatus]);
 
   return (
     <>

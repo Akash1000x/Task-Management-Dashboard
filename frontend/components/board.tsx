@@ -23,7 +23,7 @@ const Board = () => {
     if (tasks.length === 0) {
       getTasks();
     }
-  }, []);
+  });
 
   const onDrop = (event: React.DragEvent<HTMLDivElement>, newStatus: Status) => {
     event.preventDefault();

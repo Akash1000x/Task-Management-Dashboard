@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { ApiUrl } from "@/lib/config";
 import { useDispatch } from "react-redux";
 import { login } from "@/state/authSlice";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -41,6 +42,7 @@ const formSchema = z.object({
 });
 
 export default function ProfileForm() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,10 +55,11 @@ export default function ProfileForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const response = await axios.post(`${ApiUrl}/user/register`, values);
+      const response = await axios.post(`${ApiUrl}/user/register`, values, { withCredentials: true });
       if (response.status === 201) {
         toast.success(response.data.message);
         dispatch(login({ name: response.data.user.name }));
+        router.push("/board");
       } else {
         toast.error(response.data.message);
       }

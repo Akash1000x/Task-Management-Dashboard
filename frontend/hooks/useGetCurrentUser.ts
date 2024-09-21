@@ -12,8 +12,6 @@ const useGetCurrentUser = () => {
         withCredentials: true,
       });
       if (response.status === 200) {
-        console.log("use get current user called");
-
         dispatch(login({ name: response.data.user.name }));
       } else {
         throw new Error("Failed to fetch current user: " + response.data.message);

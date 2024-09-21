@@ -32,7 +32,7 @@ export default function NavBar() {
     if (!user.isAuthenticated) {
       getCurrentUser();
     }
-  }, [user]);
+  }, [user, getCurrentUser]);
 
   return (
     <div className="shadow-lg dark:shadow-[0px_4px_30px_0px_rgba(255,255,255,0.125)] sm:px-10 px-2 py-2">

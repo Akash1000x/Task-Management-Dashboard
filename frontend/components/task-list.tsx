@@ -21,7 +21,7 @@ const TaskList = () => {
     if (tasks.length === 0) {
       getTasks();
     }
-  }, []);
+  });
 
   return (
     <div className="max-w-[57rem] mx-auto">
