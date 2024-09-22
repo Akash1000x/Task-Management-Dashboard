@@ -8,14 +8,14 @@ import { connectDB } from "./db";
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-app.use(express.json());
-app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://task-management-dashboard-mu.vercel.app"],
     credentials: true,
   })
 );
+app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 connectDB();
