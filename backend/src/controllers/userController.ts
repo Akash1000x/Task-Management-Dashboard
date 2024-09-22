@@ -29,8 +29,8 @@ export const registerUser = async (req: Request, res: Response) => {
     });
 
     if (user) {
-      createJWT(res, user._id as string);
-      return res.status(201).json({ user, message: "User registered successfully" });
+      const token = createJWT(res, user._id as string);
+      return res.status(201).json({ user, token, message: "User registered successfully" });
     }
   } catch (error) {
     console.log(error);
@@ -60,8 +60,8 @@ export const loginUser = async (req: Request, res: Response) => {
       });
     }
 
-    createJWT(res, user._id as string);
-    return res.status(200).json({ user, message: "Login successful" });
+    const token = createJWT(res, user._id as string);
+    return res.status(200).json({ user, token, message: "Login successful" });
   } catch (error) {
     console.log(error);
     return res
@@ -79,19 +79,5 @@ export const getCurrentUser = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
     return res.status(400).json({ message: "An error occurred" });
-  }
-};
-
-export const logoutUser = (req: Request, res: Response) => {
-  try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: true, // Ensure this is true for HTTPS
-      sameSite: "none", // Match SameSite attribute
-    });
-    return res.status(200).json({ status: true, message: "Logout successful" });
-  } catch (error) {
-    console.log(error);
-    return res.status(400).json({ status: false, message: "Error in logout" });
   }
 };
