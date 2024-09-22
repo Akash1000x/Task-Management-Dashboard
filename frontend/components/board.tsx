@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { setTasks } from "@/state/taskSlice";
 import useGetTasks from "@/hooks/useGetTasks";
+import NoTasksMessage from "./no-task-message";
 
 const Board = () => {
   const [openCustomDialog, setOpenCustomDialog] = React.useState(false);
@@ -36,6 +37,11 @@ const Board = () => {
       setDraggedTask(null);
     }
   };
+
+  //if there are no tasks
+  if (tasks.length === 0) {
+    return <NoTasksMessage />;
+  }
 
   return (
     <div className="flex md:justify-center space-x-2 overflow-auto">

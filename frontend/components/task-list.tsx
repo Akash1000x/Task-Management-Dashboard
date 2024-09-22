@@ -9,6 +9,7 @@ import TaskForm from "./task-form";
 import { Task } from "@/lib/types";
 import useGetTasks from "@/hooks/useGetTasks";
 import { CustomDialog } from "./ui/custom-dialog";
+import NoTasksMessage from "./no-task-message";
 
 const TaskList = () => {
   const [selectTask, setSelectTask] = React.useState<Task | null>(null);
@@ -23,6 +24,11 @@ const TaskList = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  //if there are no tasks
+  if (tasks.length === 0) {
+    return <NoTasksMessage />;
+  }
 
   return (
     <div className="max-w-[57rem] mx-auto">

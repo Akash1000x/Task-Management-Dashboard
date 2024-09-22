@@ -18,6 +18,7 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const { getCurrentUser } = useGetCurrentUser();
   useAuthRedirect();
+
   const handleLogout = async () => {
     try {
       localStorage.removeItem("token");
@@ -40,9 +41,13 @@ export default function NavBar() {
   return (
     <div className="shadow-lg dark:shadow-[0px_4px_30px_0px_rgba(255,255,255,0.125)] sm:px-10 px-2 py-2">
       <nav className="flex justify-between items-center">
-        <div className="sm:space-x-10 space-x-2">
-          <Link href="/board">Board</Link>
-          <Link href="/task-list">Task List</Link>
+        <div className="sm:space-x-4 space-x-2">
+          <Link href="/board" className="bg-secondary px-3 py-2 rounded-sm">
+            Board
+          </Link>
+          <Link href="/task-list" className="bg-secondary px-3 py-2 rounded-sm">
+            Task List
+          </Link>
         </div>
 
         <div className="flex flex-1 justify-end text-white">
