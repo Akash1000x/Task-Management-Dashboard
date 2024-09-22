@@ -15,6 +15,9 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login } from "@/state/authSlice";
 
+/**
+ * Form schema for the sign in form
+ */
 const formSchema = z.object({
   email: z.string().email({
     message: "Invalid email address.",
@@ -42,6 +45,9 @@ export default function ProfileForm() {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  /**
+   * Form hook to handle the sign in form
+   */
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,9 +56,21 @@ export default function ProfileForm() {
     },
   });
 
+  /**
+   * Handle the form submission and send the form data to the server to sign in the user
+   *
+   * @param values form values to submit
+   */
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      /**
+       * Send the form data to the server to sign in the user
+       */
       const response = await axios.post(`${ApiUrl}/user/login`, values);
+      /**
+       * If the response status is 200, sign in the user, save the token in the local storage and redirect the user to the board page
+       * otherwise show an error message
+       */
       if (response.status === 200) {
         toast.success(response.data.message);
         const token = response.data.token;

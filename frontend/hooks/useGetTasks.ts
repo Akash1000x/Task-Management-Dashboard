@@ -5,6 +5,11 @@ import { ApiUrl } from "@/lib/config";
 import { useDispatch } from "react-redux";
 import { setTasks } from "@/state/taskSlice";
 
+/**
+ * Get the tasks
+ *
+ * @returns {Function} getTasks function to fetch the tasks , loading state and noTasks state if no tasks are present
+ */
 const useGetTasks = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [noTasks, setNoTasks] = React.useState<boolean>(false);

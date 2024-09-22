@@ -2,6 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { setTasks } from "@/state/taskSlice";
 
+/**
+ * Filter the tasks based on status, priority and date
+ *
+ * @returns {Function} sortByStatus, sortByPriority, sortByDate functions to sort the tasks
+ */
 export const useTaskFilter = () => {
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
   const dispatch = useDispatch();

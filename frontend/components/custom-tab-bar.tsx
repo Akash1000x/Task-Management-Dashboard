@@ -12,6 +12,9 @@ export default function CustomTabBar() {
 
   const { sortByDate, sortByStatus, sortByPriority } = useTaskFilter();
 
+  /**
+   * Sort the tasks based on the selected filter option
+   */
   React.useEffect(() => {
     if (filterOption === "date") {
       sortByDate();

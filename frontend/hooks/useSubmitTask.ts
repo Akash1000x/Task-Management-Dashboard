@@ -5,6 +5,11 @@ import useUpateTask from "./useUpdateTask";
 import { Priority, Status } from "@/lib/types";
 import useGetTasks from "./useGetTasks";
 
+/**
+ * Handles task submission, either creating a new task or updating an existing one.
+ *
+ * @returns {Function} handleSubmit - Function to manage task submission.
+ */
 export const useTaskSubmit = () => {
   const { updateTask } = useUpateTask();
   const { getTasks } = useGetTasks();

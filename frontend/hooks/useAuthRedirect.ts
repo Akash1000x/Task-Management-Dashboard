@@ -1,6 +1,9 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
+/**
+ * Redirect the user to the sign-in page if the user is not authenticated and trying to access the private routes
+ */
 const useAuthRedirect = () => {
   const router = useRouter();
   const path = usePathname();

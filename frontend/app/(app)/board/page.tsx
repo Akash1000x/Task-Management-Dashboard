@@ -7,10 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { setTasks } from "@/state/taskSlice";
 import useGetTasks from "@/hooks/useGetTasks";
-import NoTasksMessage from "@/components/no-task-message";
 import TaskCard from "@/components/ui/task-card";
 import { CustomDialog } from "@/components/ui/custom-dialog";
 import Loader from "@/components/ui/loader";
+import NoTasksMessage from "@/components/ui/no-task-message";
 
 export default function Page() {
   const [openCustomDialog, setOpenCustomDialog] = React.useState(false);
@@ -21,6 +21,9 @@ export default function Page() {
   const dispatch = useDispatch();
   const { getTasks, loading, noTasks } = useGetTasks();
 
+  /**
+   * fetch the tasks from the server when the component is mounted and there are no tasks
+   */
   React.useEffect(() => {
     if (tasks.length === 0) {
       getTasks();
@@ -28,6 +31,12 @@ export default function Page() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /**
+   * update the status of the task when dropped in the new status column
+   *
+   * @param event DragEvent
+   * @param newStatus new updated status of the task
+   */
   const onDrop = (event: React.DragEvent<HTMLDivElement>, newStatus: Status) => {
     event.preventDefault();
     if (draggedTask && draggedTask.status !== newStatus) {
@@ -39,7 +48,9 @@ export default function Page() {
     }
   };
 
-  //if the tasks are fetching from the server
+  /**
+   * if the tasks are fetching from the server
+   */
   if (loading) {
     return (
       <div className="w-full h-full flex justify-center items-center">
@@ -48,7 +59,9 @@ export default function Page() {
     );
   }
 
-  //if there are no tasks
+  /**
+   * if there are no tasks
+   */
   if (noTasks) {
     return <NoTasksMessage />;
   }

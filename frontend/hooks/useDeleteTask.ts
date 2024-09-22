@@ -3,6 +3,11 @@ import { ApiUrl } from "@/lib/config";
 import { toast } from "sonner";
 import useGetTasks from "./useGetTasks";
 
+/**
+ * Delete the task with the given task id
+ *
+ * @returns {Function} deleteTask function to delete the task
+ */
 const useDeleteTask = () => {
   const { getTasks } = useGetTasks();
   const deleteTask = async (taskId: string) => {

@@ -3,6 +3,11 @@ import { ApiUrl } from "@/lib/config";
 import { useDispatch } from "react-redux";
 import { login } from "@/state/authSlice";
 
+/**
+ * fetch the current user
+ *
+ * @returns {Function} getCurrentUser function to fetch the current user
+ */
 const useGetCurrentUser = () => {
   const dispatch = useDispatch();
 

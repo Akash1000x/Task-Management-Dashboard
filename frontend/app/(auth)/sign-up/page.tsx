@@ -15,6 +15,9 @@ import { useDispatch } from "react-redux";
 import { login } from "@/state/authSlice";
 import { useRouter } from "next/navigation";
 
+/**
+ * Form schema for the sign up form
+ */
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
@@ -44,6 +47,10 @@ const formSchema = z.object({
 export default function ProfileForm() {
   const router = useRouter();
   const dispatch = useDispatch();
+
+  /**
+   * Form hook to handle the sign up form
+   */
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,9 +60,21 @@ export default function ProfileForm() {
     },
   });
 
+  /**
+   * Handle the form submission and send the form data to the server to sign up the user
+   *
+   * @param values form values to submit
+   */
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      /**
+       * Send the form data to the server to sign up the user
+       */
       const response = await axios.post(`${ApiUrl}/user/register`, values);
+      /**
+       * If the response status is 200, sign up the user, save the token in the local storage and redirect the user to the board page
+       * otherwise show an error message
+       */
       if (response.status === 201) {
         toast.success(response.data.message);
         const token = response.data.token;

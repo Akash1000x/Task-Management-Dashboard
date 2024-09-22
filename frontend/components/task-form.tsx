@@ -23,6 +23,9 @@ interface TaskFormProps {
   } | null;
 }
 
+/**
+ * if editMode is false, it will create a new task and if it is true, it will update the task
+ */
 const TaskForm = (props: TaskFormProps) => {
   const { isDialogOpen, setIsDialogOpen, editMode = false, taskData = null } = props;
 
@@ -35,6 +38,9 @@ const TaskForm = (props: TaskFormProps) => {
 
   const { handleSubmit } = useTaskSubmit();
 
+  /**
+   * Handle the form submission and send the form data to the server to create or update the task
+   */
   const onSubmit = async () => {
     if (!title) {
       setError("Title is required");
