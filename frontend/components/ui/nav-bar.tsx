@@ -10,6 +10,7 @@ import useGetCurrentUser from "@/hooks/useGetCurrentUser";
 import * as React from "react";
 import { setTasks } from "@/state/taskSlice";
 import useAuthRedirect from "@/hooks/useAuthRedirect";
+import CustomTooltip from "./custom-tooltip";
 
 export default function NavBar() {
   const router = useRouter();
@@ -54,9 +55,11 @@ export default function NavBar() {
           <>
             {user.isAuthenticated && (
               <>
-                <div className="mr-2 flex h-10 w-10 items-center justify-center rounded-full border bg-secondary text-xl font-bold uppercase text-secondary-foreground hover:bg-secondary/80">
-                  {user.name?.charAt(0)}
-                </div>
+                <CustomTooltip content={user.name as string}>
+                  <div className="mr-2 flex h-10 w-10 items-center justify-center rounded-full border bg-secondary text-xl font-bold uppercase text-secondary-foreground hover:bg-secondary/80">
+                    {user.name?.charAt(0)}
+                  </div>
+                </CustomTooltip>
 
                 <Button onClick={handleLogout}>Log out</Button>
               </>

@@ -31,10 +31,15 @@ const TaskForm = (props: TaskFormProps) => {
   const [status, setStatus] = React.useState(taskData?.status || "To Do");
   const [priority, setPriority] = React.useState(taskData?.priority || "Medium");
   const [date, setDate] = React.useState<Date | undefined>(taskData?.dueDate || undefined);
+  const [isError, setError] = React.useState("");
 
   const { handleSubmit } = useTaskSubmit();
 
   const onSubmit = async () => {
+    if (!title) {
+      setError("Title is required");
+      return;
+    }
     await handleSubmit(title, description, status as Status, priority as Priority, date, editMode, taskData?._id);
 
     setTitle("");
@@ -53,28 +58,29 @@ const TaskForm = (props: TaskFormProps) => {
             <DialogTitle>Create new task</DialogTitle>
           </DialogHeader>
           <div className="space-y-1">
-            <Label htmlFor="name">Title</Label>
-            <Input value={title} onChange={(e) => setTitle(e.target.value)} id="name" placeholder="title" />
+            <Label htmlFor="title">Title</Label>
+            <Input value={title} onChange={(e) => setTitle(e.target.value)} id="title" placeholder="title" />
+            {isError && <span className="text-sm font-medium text-destructive">Title is required.</span>}
           </div>
           <div className="space-y-1">
-            <Label htmlFor="name">Description</Label>
+            <Label htmlFor="description">Description</Label>
             <Input
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              id="name"
+              id="description"
               placeholder="Description"
             />
           </div>
           <div className="flex justify-between">
-            <Label htmlFor="name">Status</Label>
+            <Label htmlFor="statusOptions">Status</Label>
             <Combobox data={statusOptions} value={status} setValue={setStatus} />
           </div>
           <div className="flex justify-between">
-            <Label htmlFor="name">Priority</Label>
+            <Label htmlFor="priorityOptions">Priority</Label>
             <Combobox data={priorityOptions} value={priority} setValue={setPriority} />
           </div>
           <div className="flex justify-between">
-            <Label htmlFor="name">Date</Label>
+            <Label htmlFor="date">Date</Label>
             <DatePicker date={date} setDate={setDate} />
           </div>
           <DialogFooter>
