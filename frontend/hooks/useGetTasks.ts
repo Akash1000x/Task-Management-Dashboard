@@ -13,7 +13,9 @@ const useGetTasks = () => {
     setLoading(true);
     try {
       const response = await axios.get(`${ApiUrl}/task/get-tasks`, {
-        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
       if (response.status === 200) {
         dispatch(setTasks(response.data.tasks as Task[]));

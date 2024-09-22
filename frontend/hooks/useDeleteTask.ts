@@ -11,7 +11,9 @@ const useDeleteTask = () => {
         `${ApiUrl}/task/delete/${taskId}`,
         {},
         {
-          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Include the token in the Authorization header
+          },
         }
       );
       if (response.status === 200) {

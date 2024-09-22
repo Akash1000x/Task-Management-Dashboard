@@ -33,7 +33,9 @@ export const useTaskSubmit = () => {
           `${ApiUrl}/task/create`,
           { ...taskPayload },
           {
-            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
           }
         );
 

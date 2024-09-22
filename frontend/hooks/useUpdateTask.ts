@@ -12,7 +12,9 @@ const useUpateTask = () => {
         `${ApiUrl}/task/update/${taskId}`,
         { ...task },
         {
-          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
       if (response.status === 200) {

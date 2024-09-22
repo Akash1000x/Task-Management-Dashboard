@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import useGetCurrentUser from "@/hooks/useGetCurrentUser";
 import * as React from "react";
 import { setTasks } from "@/state/taskSlice";
+import useAuthRedirect from "@/hooks/useAuthRedirect";
 
 export default function NavBar() {
   const router = useRouter();
@@ -16,9 +17,10 @@ export default function NavBar() {
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
   const dispatch = useDispatch();
   const { getCurrentUser } = useGetCurrentUser();
+  useAuthRedirect();
   const handleLogout = async () => {
     try {
-      document.cookie = `token=; path=/; max-age=0; secure; samesite=strict`;
+      localStorage.removeItem("token");
       dispatch(logout());
       if (tasks.length > 0) {
         dispatch(setTasks([]));

@@ -9,7 +9,9 @@ const useGetCurrentUser = () => {
   const getCurrentUser = async () => {
     try {
       const response = await axios.get(`${ApiUrl}/user/current-user`, {
-        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
       if (response.status === 200) {
         dispatch(login({ name: response.data.user.name }));
@@ -17,7 +19,7 @@ const useGetCurrentUser = () => {
         throw new Error("Failed to fetch current user: " + response.data.message);
       }
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   };
 

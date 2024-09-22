@@ -55,11 +55,11 @@ export default function ProfileForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const response = await axios.post(`${ApiUrl}/user/register`, values, { withCredentials: true });
+      const response = await axios.post(`${ApiUrl}/user/register`, values);
       if (response.status === 201) {
         toast.success(response.data.message);
         const token = response.data.token;
-        document.cookie = `token=${token}; path=/; secure; samesite=strict max-age=86400`;
+        localStorage.setItem("token", token);
         dispatch(login({ name: response.data.user.name }));
         router.push("/board");
       } else {
