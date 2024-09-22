@@ -58,6 +58,8 @@ export default function ProfileForm() {
       const response = await axios.post(`${ApiUrl}/user/register`, values, { withCredentials: true });
       if (response.status === 201) {
         toast.success(response.data.message);
+        const token = response.data.token;
+        document.cookie = `token=${token}; path=/; secure; samesite=strict max-age=86400`;
         dispatch(login({ name: response.data.user.name }));
         router.push("/board");
       } else {

@@ -5,24 +5,25 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/state/authSlice";
 import { RootState } from "@/state/store";
-import axios from "axios";
-import { ApiUrl } from "@/lib/config";
 import { useRouter } from "next/navigation";
 import useGetCurrentUser from "@/hooks/useGetCurrentUser";
-import React from "react";
+import * as React from "react";
+import { setTasks } from "@/state/taskSlice";
 
 export default function NavBar() {
   const router = useRouter();
   const user = useSelector((state: RootState) => state.auth);
+  const tasks = useSelector((state: RootState) => state.tasks.tasks);
   const dispatch = useDispatch();
   const { getCurrentUser } = useGetCurrentUser();
   const handleLogout = async () => {
     try {
-      const response = await axios.post(`${ApiUrl}/user/logout`, {}, { withCredentials: true });
-      if (response.status === 200) {
-        dispatch(logout());
-        router.push("/sign-in");
+      document.cookie = `token=; path=/; max-age=0; secure; samesite=strict`;
+      dispatch(logout());
+      if (tasks.length > 0) {
+        dispatch(setTasks([]));
       }
+      router.push("/sign-in");
     } catch (error) {
       console.error(error);
     }
