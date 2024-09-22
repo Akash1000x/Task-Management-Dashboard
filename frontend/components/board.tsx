@@ -23,7 +23,8 @@ const Board = () => {
     if (tasks.length === 0) {
       getTasks();
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onDrop = (event: React.DragEvent<HTMLDivElement>, newStatus: Status) => {
     event.preventDefault();

@@ -2,10 +2,11 @@ import axios from "axios";
 import { ApiUrl } from "@/lib/config";
 import { useDispatch } from "react-redux";
 import { login } from "@/state/authSlice";
+import { useRouter } from "next/navigation";
 
 const useGetCurrentUser = () => {
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const getCurrentUser = async () => {
     try {
       const response = await axios.get(`${ApiUrl}/user/current-user`, {
@@ -14,9 +15,10 @@ const useGetCurrentUser = () => {
       if (response.status === 200) {
         dispatch(login({ name: response.data.user.name }));
       } else {
-        throw new Error("Failed to fetch current user: " + response.data.message);
+        router.push("/sign-in");
       }
     } catch (err) {
+      router.push("/sign-in");
       console.error(err);
     }
   };

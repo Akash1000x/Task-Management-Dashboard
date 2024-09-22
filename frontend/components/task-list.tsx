@@ -21,7 +21,8 @@ const TaskList = () => {
     if (tasks.length === 0) {
       getTasks();
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="max-w-[57rem] mx-auto">
