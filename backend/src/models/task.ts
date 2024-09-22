@@ -15,7 +15,7 @@ export enum Priority {
 
 interface ITask extends Document {
   title: string;
-  description: string;
+  description?: string;
   status: Status;
   priority: Priority;
   dueDate: Date;
@@ -25,7 +25,7 @@ interface ITask extends Document {
 const TaskSchema: Schema<ITask> = new Schema(
   {
     title: { type: String, required: true },
-    description: { type: String, required: true },
+    description: { type: String },
     status: { type: String, enum: Object.values(Status), default: Status.ToDO, required: true },
     priority: { type: String, enum: Object.values(Priority), default: Priority.Medium, required: true },
     dueDate: { type: Date, required: true },
