@@ -1,13 +1,4 @@
 # Task Management Dashboard with the Kanban Board
-## Features
-- **Task List View**: Simple, streamlined task management.
-- **Kanban Board**: Drag and drop tasks between statuses (To Do, In Progress, Completed).
-- **Create/Edit Tasks**: Users can add or edit tasks with priority settings.
-- **View Task Details**: Full task details available for viewing.
-- **Delete Tasks**: Effortlessly delete tasks from the list.
-- **User Authentication**: Secure login and registration.
-- **Backend API**: Integrated with MongoDB for dynamic data storage and retrieval.
-
 ## Screenshots
 
 ### Kanban Board View 
@@ -25,4 +16,12 @@
 ### Delete Task
 ![image](https://github.com/user-attachments/assets/c51da376-d956-4aa6-9c51-5b337eab11fd)
 
+## Features
+- **Task List View**: Simple, streamlined task management.
+- **Kanban Board**: Drag and drop tasks between statuses (To Do, In Progress, Completed).
+- **Create/Edit Tasks**: Users can add or edit tasks with priority settings.
+- **View Task Details**: Full task details available for viewing.
+- **Delete Tasks**: Effortlessly delete tasks from the list.
+- **User Authentication**: Secure login and registration.
+- **Backend API**: Integrated with MongoDB for dynamic data storage and retrieval.
 
