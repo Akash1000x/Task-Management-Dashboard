@@ -4,7 +4,12 @@ import { Request, Response, NextFunction } from "express";
 
 export const verifyJWT = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.cookies?.token;
+    const authHeader = req.headers["authorization"];
+
+    if (!authHeader) {
+      return res.status(401).json({ status: false, message: "No token provided" });
+    }
+    const token = authHeader.split(" ")[1];
 
     if (!token) {
       return res.status(401).json({ status: false, message: "Not authorized. Try login again." });
