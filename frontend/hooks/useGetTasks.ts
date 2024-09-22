@@ -7,6 +7,7 @@ import { setTasks } from "@/state/taskSlice";
 
 const useGetTasks = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [noTasks, setNoTasks] = React.useState<boolean>(false);
   const dispatch = useDispatch();
 
   const getTasks = async () => {
@@ -18,6 +19,9 @@ const useGetTasks = () => {
         },
       });
       if (response.status === 200) {
+        if (response.data.tasks.length === 0) {
+          setNoTasks(true);
+        }
         dispatch(setTasks(response.data.tasks as Task[]));
       } else {
         throw new Error("Failed to fetch tasks", response.data.message);
@@ -29,7 +33,7 @@ const useGetTasks = () => {
     }
   };
 
-  return { loading, getTasks };
+  return { loading, getTasks, noTasks };
 };
 
 export default useGetTasks;
