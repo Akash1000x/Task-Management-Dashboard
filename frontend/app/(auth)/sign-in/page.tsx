@@ -100,7 +100,7 @@ export default function ProfileForm() {
             )}
           />
           <Button type="submit" className="w-full">
-            Submit
+            Sign in
           </Button>
         </form>
       </Form>
