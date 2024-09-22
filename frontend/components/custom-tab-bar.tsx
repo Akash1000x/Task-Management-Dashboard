@@ -20,7 +20,8 @@ export default function CustomTabBar() {
     } else if (filterOption === "status") {
       sortByStatus();
     }
-  }, [filterOption, sortByDate, sortByPriority, sortByStatus]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterOption]);
 
   return (
     <>

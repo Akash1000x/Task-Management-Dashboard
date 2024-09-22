@@ -4,7 +4,6 @@ import { useEffect } from "react";
 const useAuthRedirect = () => {
   const router = useRouter();
   const path = usePathname();
-  console.log("auth redirct");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
