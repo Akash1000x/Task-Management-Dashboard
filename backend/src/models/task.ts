@@ -22,6 +22,9 @@ interface ITask extends Document {
   user: IUser["_id"];
 }
 
+/**
+ * Task Schema
+ */
 const TaskSchema: Schema<ITask> = new Schema(
   {
     title: { type: String, required: true },

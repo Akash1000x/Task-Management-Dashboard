@@ -10,6 +10,9 @@ type Task = {
   dueDate: Date;
 };
 
+/**
+ * Create a new task in the database
+ */
 export const createTask = async (req: Request, res: Response) => {
   try {
     const { title, description, status, priority, dueDate }: Task = req.body;
@@ -24,6 +27,9 @@ export const createTask = async (req: Request, res: Response) => {
       user,
     });
 
+    /**
+     * Save the task in the database and return the saved task
+     */
     const savedTask = await task.save();
     res.status(201).json({ savedTask, message: "Task created successfully" });
   } catch (error) {
@@ -31,6 +37,9 @@ export const createTask = async (req: Request, res: Response) => {
   }
 };
 
+/**
+ * @returns return all the tasks from the database
+ */
 export const getTasks = async (req: Request, res: Response) => {
   try {
     const userId = req.user?._id;
@@ -42,6 +51,9 @@ export const getTasks = async (req: Request, res: Response) => {
   }
 };
 
+/**
+ * update a task in the database
+ */
 export const updateTask = async (req: Request, res: Response) => {
   try {
     const taskId: string = req.params.id;
@@ -59,6 +71,9 @@ export const updateTask = async (req: Request, res: Response) => {
   }
 };
 
+/**
+ * delete a task from the database
+ */
 export const deleteTask = async (req: Request, res: Response) => {
   try {
     const taskId: string = req.params.id;
