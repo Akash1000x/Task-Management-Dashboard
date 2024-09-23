@@ -64,6 +64,15 @@ export default function ProfileForm() {
   return (
     <div className="min-w-96 px-6 border rounded-lg">
       <h1 className="font-bold text-4xl pt-6 pb-4 text-center">Sign in</h1>
+      <div className="text-center text-base font-medium tracking-wide py-2">
+        <p>
+          <span>Test email: </span>test@gmail.com
+        </p>
+        <p>
+          <span>Test password: </span>12345Aa@
+        </p>
+      </div>
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
