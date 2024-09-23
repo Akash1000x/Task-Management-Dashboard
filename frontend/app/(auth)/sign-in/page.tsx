@@ -14,32 +14,7 @@ import { ApiUrl } from "@/lib/config";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login } from "@/state/authSlice";
-
-/**
- * Form schema for the sign in form
- */
-const formSchema = z.object({
-  email: z.string().email({
-    message: "Invalid email address.",
-  }),
-  password: z
-    .string()
-    .min(8, {
-      message: "Password must be at least 8 characters.",
-    })
-    .regex(/[A-Z]/, {
-      message: "Password must contain at least one uppercase letter.",
-    })
-    .regex(/[a-z]/, {
-      message: "Password must contain at least one lowercase letter.",
-    })
-    .regex(/[0-9]/, {
-      message: "Password must contain at least one number.",
-    })
-    .regex(/[@$!%*?&#]/, {
-      message: "Password must contain at least one special character.",
-    }),
-});
+import { SignInformSchema } from "@/lib/schema";
 
 export default function ProfileForm() {
   const router = useRouter();
@@ -48,8 +23,8 @@ export default function ProfileForm() {
   /**
    * Form hook to handle the sign in form
    */
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof SignInformSchema>>({
+    resolver: zodResolver(SignInformSchema),
     defaultValues: {
       password: "",
       email: "",
@@ -61,7 +36,7 @@ export default function ProfileForm() {
    *
    * @param values form values to submit
    */
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof SignInformSchema>) {
     try {
       /**
        * Send the form data to the server to sign in the user
@@ -98,7 +73,7 @@ export default function ProfileForm() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="example@gmail.com" {...field} />
+                  <Input placeholder="example@gmail.com" type="email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -111,7 +86,7 @@ export default function ProfileForm() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="........" {...field} />
+                  <Input placeholder="Enter your password" type="password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

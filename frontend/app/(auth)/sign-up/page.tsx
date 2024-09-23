@@ -14,35 +14,7 @@ import { ApiUrl } from "@/lib/config";
 import { useDispatch } from "react-redux";
 import { login } from "@/state/authSlice";
 import { useRouter } from "next/navigation";
-
-/**
- * Form schema for the sign up form
- */
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Invalid email address.",
-  }),
-  password: z
-    .string()
-    .min(8, {
-      message: "Password must be at least 8 characters.",
-    })
-    .regex(/[A-Z]/, {
-      message: "Password must contain at least one uppercase letter.",
-    })
-    .regex(/[a-z]/, {
-      message: "Password must contain at least one lowercase letter.",
-    })
-    .regex(/[0-9]/, {
-      message: "Password must contain at least one number.",
-    })
-    .regex(/[@$!%*?&#]/, {
-      message: "Password must contain at least one special character.",
-    }),
-});
+import { SignUpformSchema } from "@/lib/schema";
 
 export default function ProfileForm() {
   const router = useRouter();
@@ -51,8 +23,8 @@ export default function ProfileForm() {
   /**
    * Form hook to handle the sign up form
    */
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof SignUpformSchema>>({
+    resolver: zodResolver(SignUpformSchema),
     defaultValues: {
       name: "",
       password: "",
@@ -65,7 +37,7 @@ export default function ProfileForm() {
    *
    * @param values form values to submit
    */
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof SignUpformSchema>) {
     try {
       /**
        * Send the form data to the server to sign up the user
@@ -103,7 +75,7 @@ export default function ProfileForm() {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="your name" {...field} />
+                  <Input type="text" placeholder="Enter your name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -116,7 +88,7 @@ export default function ProfileForm() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="example@gmail.com" {...field} />
+                  <Input type="email" placeholder="example@gmail.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -129,7 +101,7 @@ export default function ProfileForm() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="........" {...field} />
+                  <Input type="password" placeholder="Enter your password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
