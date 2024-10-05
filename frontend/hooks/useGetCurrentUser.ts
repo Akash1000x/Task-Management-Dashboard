@@ -21,6 +21,7 @@ const useGetCurrentUser = () => {
       if (response.status === 200) {
         dispatch(login({ name: response.data.user.name }));
       } else {
+        localStorage.removeItem("token");
         throw new Error("Failed to fetch current user: " + response.data.message);
       }
     } catch (err) {

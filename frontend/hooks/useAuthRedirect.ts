@@ -13,6 +13,10 @@ const useAuthRedirect = () => {
 
     const isPublicPath = path === "/sign-in" || path === "/sign-up";
 
+    if (token && isPublicPath) {
+      router.push("/board");
+    }
+
     if (!token && !isPublicPath) {
       router.push("/sign-in");
     }
